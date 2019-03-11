@@ -32,10 +32,13 @@ RSpec.describe Course, type: :model do
   end
 
   context "#scope" do
-    let!(:course_a) { create :course }
-    let!(:course_b) { create :course }
-    it "should return users in the correct order" do
-      expect(Course.desc) == [ course_a, course_b ]
+    before(:all) do
+      @course_a = FactoryBot.create(:course, created_at: 1.day.ago)
+      @course_b = FactoryBot.create(:course, created_at: 4.days.ago)
+    end
+
+    it "should return course in the correct order" do
+      expect(Course.order_by) == [@course_a, @course_b]
     end
   end
 

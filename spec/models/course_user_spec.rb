@@ -5,4 +5,11 @@ RSpec.describe CourseUser, type: :model do
     it {is_expected.to belong_to :course}
     it {is_expected.to belong_to :user}
   end
+
+  context "have attributes" do
+    it "have attributes " do
+      expect(CourseUser.new.attributes.keys).to include("id", "user_id", "status", "course_id",
+        "debit")
+    end
+  end
 end
