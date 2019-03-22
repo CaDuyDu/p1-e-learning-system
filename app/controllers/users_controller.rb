@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :load_user, :logged_in_user, except: %i(new create)
   before_action :admin_user, only: %i(index show)
   before_action :correct_user, only: %i(show edit)
-  before_action :list_permissions, except: %i(new create)
+  load_and_authorize_resource
 
   def index
   end

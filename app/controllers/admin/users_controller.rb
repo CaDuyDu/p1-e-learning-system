@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::AdminBaseController
   before_action :load_user, except: %i(index)
   before_action :logged_in_user, except: %i(show)
   before_action :admin_user, except: %i(index)
-  before_action :list_permissions
+  load_and_authorize_resource
 
   def index
     @users = User.order_asc.by_role(:student).page(params[:page]).per Settings.user.record_page

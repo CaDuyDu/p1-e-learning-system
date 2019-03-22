@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.5.3"
 
-
 gem "rails", "~> 5.2.1"
 gem "bcrypt", "~> 3.1.12"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
@@ -26,6 +25,7 @@ gem "rails-i18n"
 gem "jquery-rails"
 gem "factory_bot"
 gem "rails-controller-testing"
+gem "cancancan", "~> 2.0"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

@@ -1,10 +1,9 @@
 class Admin::CoursesController < Admin::AdminBaseController
   before_action :load_subject, only: %i(edit show update destroy)
   before_action :logged_in_user, except: %i(show)
-  before_action :admin_user, :list_permissions
 
   def index
-    @courses = Course.order_asc.page(params[:page]).per Settings.user.record_page
+    @courses = Course.order_by.page(params[:page]).per Settings.user.record_page
   end
 
   def new

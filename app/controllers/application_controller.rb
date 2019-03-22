@@ -31,5 +31,5 @@ class ApplicationController < ActionController::Base
       else
         admin_user_path current_user
       end
-    end
+  end
 end
