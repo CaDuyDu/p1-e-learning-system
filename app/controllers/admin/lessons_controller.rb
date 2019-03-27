@@ -1,4 +1,5 @@
 class Admin::LessonsController < Admin::AdminBaseController
+  before_action :list_permissions, only: %i(new edit show index)
   before_action :load_subject, only: %i(edit show update destroy)
 
   def index

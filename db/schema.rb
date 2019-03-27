@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_090245) do
+ActiveRecord::Schema.define(version: 2019_03_27_100733) do
+
+  create_table "ckeditor_assets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "data_fingerprint"
+    t.string "type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
 
   create_table "comment_lessons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
@@ -41,10 +52,10 @@ ActiveRecord::Schema.define(version: 2019_03_27_090245) do
     t.bigint "subject_id"
     t.bigint "user_id"
     t.string "course_name"
-    t.integer "quantity_registered", default: 0
+    t.integer "quantity_registered"
     t.date "start_time"
-    t.text "description"
-    t.integer "price"
+    t.string "description"
+    t.decimal "price", precision: 20, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id", "created_at"], name: "index_courses_on_subject_id_and_created_at"
@@ -143,6 +154,15 @@ ActiveRecord::Schema.define(version: 2019_03_27_090245) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "permission_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name_permission"
+    t.string "path"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "permissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name_permission"
     t.string "path"
@@ -152,7 +172,7 @@ ActiveRecord::Schema.define(version: 2019_03_27_090245) do
 
   create_table "subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name_subject"
-    t.text "description"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -176,12 +196,17 @@ ActiveRecord::Schema.define(version: 2019_03_27_090245) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_salt"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
@@ -191,7 +216,7 @@ ActiveRecord::Schema.define(version: 2019_03_27_090245) do
     t.string "name_video"
     t.string "link"
     t.integer "lesson_number"
-    t.text "description"
+    t.string "description"
     t.bigint "subject_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
