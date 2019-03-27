@@ -40,6 +40,21 @@
 
     <h3 class="menu-title"><%= t "layout.panner.Class" %></h3>
 
+    <% if check_student %>
+      <% @permissions_user.each do |permission_user| %>
+      <li class="menu-item-has-children">
+        <%= link_to permission_user.path do %>
+          <% if !permission_user.icon.nil? %>
+            <%= permission_user.icon.html_safe %>
+          <% end %>
+          <span class="margin-left-1em">
+            <%= permission_user.name_permission %>
+          </span>
+        <% end %>
+      </li>
+      <% end %>
+    <% end %>
+
     <h3 class="menu-title"><%= t "layout.panner.Other" %></h3>
     <li class="menu-item-has-children">
       <%= link_to do %>

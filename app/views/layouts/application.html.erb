@@ -14,18 +14,16 @@
 </head>
 
 <body>
-  <div id="app">
-    <aside id="left-panel" class="left-panel col padding-0">
-      <nav class="navbar navbar-expand-sm ">
-        <%= render "layouts/left_panner" %>
-      </nav>
-    </aside>
-    <div id="right-panel" class="right-panel col padding-0">
-      <%= render "layouts/header" %>
-      <div class="content mt-3">
-        <%= render "shared/show_flash" %>
-        <%= yield %>
-      </div>
+  <aside id="left-panel" class="left-panel col padding-0">
+    <nav class="navbar navbar-expand-sm ">
+      <%= render "layouts/left_panner" %>
+    </nav>
+  </aside>
+  <div id="right-panel" class="right-panel col padding-0">
+    <%= render "layouts/header" %>
+    <div class="content mt-3">
+      <%= render "shared/show_flash" %>
+      <%= yield %>
     </div>
   </div>
 </body>

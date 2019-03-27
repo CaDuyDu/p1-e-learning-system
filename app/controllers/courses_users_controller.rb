@@ -1,4 +1,6 @@
 class CoursesUsersController < ApplicationController
+  before_action :list_permissions, only: %i(new edit show index)
+
   def create
     @course_user = CourseUser.new
     @course_user.course_id = params[:format]
@@ -13,5 +15,15 @@ class CoursesUsersController < ApplicationController
       flash[:danger] = t "register_failed"
     end
     redirect_to courses_path
+  end
+
+  def show
+    user_course = CourseUser.find_by(user_id: current_user.id, course_id: params[:id])
+    if user_course.activated?
+      @lessons = Lesson.by_course_id(params[:id]).page(params[:page]).per Settings.course_user.page
+    else
+      redirect_to courses_path
+      flash[:danger] = t ".not_yet_confirmed"
+    end
   end
 end

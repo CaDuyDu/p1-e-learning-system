@@ -18,7 +18,6 @@ $(document).on('turbolinks:load', function() {
     $('#formattedNumberField').val(n.toLocaleString().replace(/\,/g, '.'));
   }
 
-
   if($('.course-price').length){
     for (let i = 0; i < $('.course-price').length; i++) {
       var n = parseInt($('.course-price').eq(i).text().replace(/\D/g,''),10);

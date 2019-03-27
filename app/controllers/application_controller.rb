@@ -3,13 +3,17 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :set_locale
-  helper_method :check_admin
+  helper_method :check_admin, :check_student
   before_action :authenticate_user!
 
   include SessionsHelper
 
   def check_admin
     !current_user.student?
+  end
+
+  def check_student
+    current_user.student?
   end
 
   protected
@@ -47,9 +51,15 @@ class ApplicationController < ActionController::Base
     @permissions = Permission.by_role_id User.roles[current_user.role] || []
     @path_home =
       if current_user.student?
+        list_permissions_user
         user_path current_user
       else
         admin_user_path current_user
       end
+  end
+
+  def list_permissions_user
+    @permissions_user = PermissionUser.by_user_id current_user.id
+    @path_home = courses_path
   end
 end

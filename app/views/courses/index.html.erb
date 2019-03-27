@@ -1,140 +1,144 @@
-<div class="row">
-  <div class="breadcrumbs">
-    <div class="col-sm-4">
-      <div class="page-header float-left">
-        <div class="page-title">
-          <h1><%= t ".course_information" %></h1>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-8">
-      <div class="page-header float-right">
-        <div class="page-title">
-          <ol class="breadcrumb text-right">
-            <li><%= t ".informations" %></li>
-            <li><%= t ".course" %></li>
-            <li class="active"><%= t ".table" %></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<%= javascript_include_tag "course_show_register", "data-turbolinks-track": "reload" %>
 
-  <div class="content mt-3">
-    <div class="animated fadeIn">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <strong class="card-title"><%= t ".list_of_class" %></strong>
-            </div>
-            <div class="card-body">
-              <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th><%= t ".class_name" %></th>
-                    <th><%= t ".course_information" %></th>
-                    <th><%= t ".quantity_registered" %></th>
-                    <th><%= t ".price" %></th>
-                    <th><%= t ".register" %></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @courses.each do |courses| %>
+<div id="app" >
+  <div class="row">
+    <div class="breadcrumbs">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1><%= t ".course_information" %></h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><%= t ".informations" %></li>
+              <li><%= t ".course" %></li>
+              <li class="active"><%= t ".table" %></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content mt-3">
+      <div class="animated fadeIn">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <strong class="card-title"><%= t ".list_of_class" %></strong>
+              </div>
+              <div class="card-body">
+                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                  <thead>
                     <tr>
-                      <td><%= courses.course_name %></td>
-                      <td><%= courses.description %></td>
-                      <td><%= courses.quantity_registered %></td>
-                      <td class="course-price"><%= courses.price %></td>
-                      <td>
-                        <%= link_to do %>
-                          <%= link_to t(".register"), courses_users_path(courses), class: "btn btn-primary",
-                           data: {confirm: t("you_sure")}, method: :post%>
-                        <% end %>
-                        <button type="button" class="btn btn-success" data-toggle="modal"
-                            data-target="#exampleModal" @click="getCourse(<%= courses.id %>)">
-                            <%= t ".details" %>
-                        </button>
-                      </td>
+                      <th><%= t ".class_name" %></th>
+                      <th><%= t ".course_information" %></th>
+                      <th><%= t ".quantity_registered" %></th>
+                      <th><%= t ".price" %></th>
+                      <th><%= t ".register" %></th>
                     </tr>
-                  <% end %>
-                </tbody>
-              </table>
-              <%= paginate @courses, theme: "twitter-bootstrap-4" %>
+                  </thead>
+                  <tbody>
+                    <% @courses.each do |courses| %>
+                      <tr>
+                        <td><%= courses.course_name %></td>
+                        <td><%= courses.description %></td>
+                        <td><%= courses.quantity_registered %></td>
+                        <td class="course-price">{{formatNumber(<%= courses.price %>)}}</td>
+                        <td>
+                          <%= link_to do %>
+                            <%= link_to t(".register"), courses_users_path(courses), class: "btn btn-primary",
+                            data: {confirm: t("you_sure")}, method: :post%>
+                          <% end %>
+                          <button type="button" class="btn btn-success" data-toggle="modal"
+                              data-target="#exampleModal" @click="getCourse(<%= courses.id %>)">
+                              <%= t ".details" %>
+                          </button>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <%= paginate @courses, theme: "twitter-bootstrap-4" %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><%= t ".details_course" %></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".course_name" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ course.course_name }}</h4>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><%= t ".details_course" %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".course_name" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course.course_name }}</h4>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".start_time" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ course.start_time }}</h4>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".start_time" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course.start_time }}</h4>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".description" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ course.description }}</h4>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".description" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course.description }}</h4>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".price" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ formatNumber(course.price) }}</h4>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".price" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ formatNumber(course.price) }}</h4>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".subject" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ course.name_subject }}</h4>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".subject" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course.name_subject }}</h4>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".quantity_registered" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ course.quantity_registered }}</h4>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".quantity_registered" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course.quantity_registered }}</h4>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".created_at" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ course.created_at }}</h4>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".created_at" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course.created_at }}</h4>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"><%= t ".updated_at" %></label>
-            <div class="col-lg-9 padding-top-10">
-              <h4>{{ course.updated_at }}</h4>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".updated_at" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course.updated_at }}</h4>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t ".close" %></button>
-        <a data-confirm='<%= t".register" %>' rel="nofollow" data-method="post"
-          :href="'/courses_users.' + course.id" class="btn btn-primary"><%= t ".register" %></a>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t ".close" %></button>
+          <a data-confirm='<%= t".register" %>' rel="nofollow" data-method="post"
+            :href="'/courses_users.' + course.id" class="btn btn-primary"><%= t ".register" %></a>
+        </div>
       </div>
     </div>
   </div>

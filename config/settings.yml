@@ -10,3 +10,9 @@ courses:
   page: 10
 subject:
   max_name: 50
+lessons:
+  page: 1
+course_user:
+  page: 10
+lesson:
+  page: 10

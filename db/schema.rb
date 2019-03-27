@@ -25,7 +25,15 @@ ActiveRecord::Schema.define(version: 2019_02_24_061805) do
   end
 
   create_table "course_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+<<<<<<< HEAD
     t.boolean "status", default: false, null: false
+=======
+<<<<<<< HEAD
+    t.integer "status", default: false, null: false
+=======
+    t.boolean "status"
+>>>>>>> aeb988918d06ef2b57f4760146aedb46ba3cd77d
+>>>>>>> 1c73813... Create lesson
     t.decimal "debit", precision: 10
     t.bigint "user_id"
     t.bigint "course_id"
@@ -123,18 +131,24 @@ ActiveRecord::Schema.define(version: 2019_02_24_061805) do
 
   create_table "lessons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
-    t.string "content"
+    t.text "content"
     t.bigint "user_id"
     t.bigint "course_id"
-    t.bigint "video_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id", "created_at"], name: "index_lessons_on_course_id_and_created_at"
     t.index ["course_id"], name: "index_lessons_on_course_id"
     t.index ["user_id", "created_at"], name: "index_lessons_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_lessons_on_user_id"
-    t.index ["video_id", "created_at"], name: "index_lessons_on_video_id_and_created_at"
-    t.index ["video_id"], name: "index_lessons_on_video_id"
+  end
+
+  create_table "permission_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name_permission"
+    t.string "path"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "permissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -213,7 +227,6 @@ ActiveRecord::Schema.define(version: 2019_02_24_061805) do
   add_foreign_key "lesson_videos", "videos"
   add_foreign_key "lessons", "courses"
   add_foreign_key "lessons", "users"
-  add_foreign_key "lessons", "videos"
   add_foreign_key "videos", "subjects"
   add_foreign_key "videos", "users"
 end

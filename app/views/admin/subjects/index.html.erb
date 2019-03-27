@@ -48,17 +48,21 @@
                       <td><%= subject.created_at %></td>
                       <td>
                         <div class="col-3">
-                          <%= link_to  admin_subject_path(subject), class: "btn btn-outline-primary btn-border-radius" do %>
+                          <%= link_to  admin_subject_path(subject), "data-tooltip" => t("details"),
+                            class: "btn btn-outline-primary btn-border-radius" do %>
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                           <% end %>
                         </div>
                         <div class="col-3">
-                          <%= link_to  edit_admin_subject_path(subject), class: "btn btn-outline-info btn-border-radius" do %>
+                          <%= link_to  edit_admin_subject_path(subject), "data-tooltip" => t("edit"),
+                            class: "btn btn-outline-info btn-border-radius" do %>
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                           <% end %>
                         </div>
                         <div class="col-3">
-                          <%= link_to admin_subject_path(subject), method: :delete, data: {confirm: t(".you_sure")}, class: "btn btn-outline-danger btn-border-radius" do %>
+                          <%= link_to admin_subject_path(subject), "data-tooltip" => t("delete"),
+                            method: :delete, data: {confirm: t(".you_sure")},
+                            class: "btn btn-outline-danger btn-border-radius" do %>
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                           <% end %>
                         </div>

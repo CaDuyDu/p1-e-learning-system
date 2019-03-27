@@ -1,16 +1,14 @@
-<% provide :title, t(".new_courses") %>
+<% provide :title, t("lessons.index.new_lessons") %>
 <% provide :button_text, t("save") %>
 <% provide :method_form, :post %>
 <% provide :path_form, admin_courses_path %>
 
-<%= javascript_include_tag "course", "data-turbolinks-track": "reload" %>
-
-<div class="container py-3" >
+<div class="container py-3">
   <div class="row">
     <div class="mx-auto col-sm-6">
       <div class="card">
         <div class="card-header">
-          <h4 class="mb-0"><%= t ".new_courses" %></h4>
+          <h4 class="mb-0"><%= t "lessons.index.new_lessons" %></h4>
         </div>
         <div class="card-body">
           <%= render "form"%>
