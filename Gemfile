@@ -28,6 +28,10 @@ gem "rails-controller-testing"
 gem "cancancan", "~> 2.0"
 gem "devise"
 gem "devise-encryptable"
+gem "ckeditor"
+gem "paperclip"
+gem "ransack"
+gem 'pry', '~> 0.12.2'
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

@@ -29,7 +29,6 @@
       <% @permissions.each do |permission| %>
       <li class="menu-item-has-children">
         <%= link_to permission.path do %>
-          <%= permission.icon.html_safe %>
           <span class="margin-left-1em">
             <%= permission.name_permission %>
           </span>

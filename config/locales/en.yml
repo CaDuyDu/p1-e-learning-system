@@ -7,7 +7,7 @@ en:
   female: Female
   other_gender: Other gender
   select_gender: Select gender
-  number: Number
+  numbers: Number
   cancel: Cancel
   save: Save
   update: Update
@@ -73,6 +73,18 @@ en:
     sigup:
       full_name: Full Name
       sign_up: Sign up
+  lessons:
+      index:
+        lessons_list: Lessons list
+        title: Title
+        content: Content
+        acction: Acctions
+        summary: Summary
+        lessons: Lessons
+        theory: Theory
+        information: Information
+        table: Table
+        new_lessons: New Lessons
   admin:
     users:
       index:

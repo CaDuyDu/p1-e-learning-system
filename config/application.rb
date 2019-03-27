@@ -9,6 +9,7 @@ module P1ELearningSystem
     config.load_defaults 5.2
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.available_locales = [:en, :vi]
+    config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
 
     config.generators do |g|
       g.test_framework :rspec,

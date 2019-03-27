@@ -4,4 +4,6 @@ class Lesson < ApplicationRecord
   has_many :comment_lessons, dependent: :destroy
 
   belongs_to :course
+
+  scope :order_by, -> {order created_at: :desc}
 end

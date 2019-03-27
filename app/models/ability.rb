@@ -14,6 +14,7 @@ class Ability
 
   def role_admin
     can :manage, Course
+    can :manage, Lesson
 
     can %i(read update), User, id: @user.id
     can :create, User

@@ -10,3 +10,5 @@ courses:
   page: 10
 subject:
   max_name: 50
+lessons:
+  page: 1
