@@ -14,13 +14,23 @@ vi:
   back: quay lại
   create_success: Tạo Thành Công
   create_failed: Tạo Thất Bại
+  delete_success: Xóa Thành Công
+  delete_failed: Xóa Thất Bại
   you_sure: Bạn chắc chắn?
+  you_sure_delete: Bạn chắc chắn Xóa?
+  you_sure_active: Bạn chắc chắn Kích Hoạt?
   deleted_success: Xóa Thành Công
   deleted_failed: Xóa Thất Bại
   updated_success: Cập Nhật Thành Công
   update_failed: Cập Nhật Thất Bại
   register_success: Đăng Ký Thành Công
   register_failed: Đăng Ký Thất Bại
+  close: Hủy
+  act: Hành Động
+  details: Chi Tiết
+  edit: Sửa
+  delete: Xóa
+  active: Kích Hoạt
   layout:
     header:
       my_profile: Thông tin của tôi
@@ -70,6 +80,18 @@ vi:
     sigup:
       full_name: Tên Đầy Đủ
       sign_up: Đăng Ký
+  lessons:
+    index:
+      lessons_list: Danh sach bài học
+      title: Tên bài học
+      content: Nội dung
+      acction: Hành động
+      summary: Tóm tắt lý thuyết
+      lessons: Bài học
+      theory: Lý thuyết
+      information: Thông tin
+      table: Bảng
+      new_lessons: Thêm bài học mới
   admin:
     users:
       index:
@@ -179,6 +201,13 @@ vi:
         placeholder_name: Tên Lớp . . .
         description: Mô Tả
         placeholder_description: Mô Tả . . .
+    courses_users:
+      email: email
+      course_name: Tên Khóa Học
+      debit: Khoản Nợ
+      created_at: Ngày Tạo
+      act: Hành Động
+      list_wait_registed: Danh Sách Chờ Đăng Ký
   courses:
     index:
       list_of_class: Danh Sách Các Khóa Học
@@ -199,3 +228,8 @@ vi:
       details_course: Chi Tiết Khóa Học
       details: Chi Tiết
       close: Hủy
+  courses_users:
+    show:
+      list_lesson_of_course: Danh sách buổi học của khóa học
+      not_yet_confirmed: Chưa Được Xác Nhận
+      title: Tiêu Đề

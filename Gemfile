@@ -28,6 +28,9 @@ gem "rails-controller-testing"
 gem "cancancan", "~> 2.0"
 gem "devise"
 gem "devise-encryptable"
+gem "ckeditor"
+gem "mini_magick"
+gem "carrierwave"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

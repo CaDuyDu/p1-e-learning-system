@@ -1,0 +1,141 @@
+<%= javascript_include_tag "courses_users", "data-turbolinks-track": "reload" %>
+<div id="app">
+  <div class="row">
+    <div class="breadcrumbs">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li><a href="#"></a></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content mt-3">
+      <div class="animated fadeIn">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <strong class="card-title"><%= t ".list_wait_registed" %></strong>
+              </div>
+              <div class="table-responsive">
+                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col"><%= t "number" %></th>
+                      <th scope="col"><%= t ".email" %></th>
+                      <th scope="col"><%= t ".course_name" %></th>
+                      <th scope="col"><%= t ".debit" %></th>
+                      <th scope="col"><%= t ".created_at" %></th>
+                      <th scope="col"><%= t ".act" %></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @courses_users.each_with_index do |course_user, index| %>
+                      <tr>
+                        <th scope="row"><%= index+1 %></th>
+                        <td><%= course_user[:email] %></td>
+                        <td><%= course_user[:course_name] %></td>
+                        <td class="course-price">{{formatNumber(<%= course_user[:debit] %>)}}</td>
+                        <td><%= course_user[:created_at] %></td>
+                        <td>
+                          <div class="col-4">
+                            <button type="button" class="btn btn-outline-info btn-border-radius" data-toggle="modal"
+                              data-target="#exampleModal" @click="setCourseUser(<%= course_user.to_json %>)">
+                              <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </button>
+                          </div>
+                          <div class="col-4">
+                            <%= button_to  admin_courses_user_path(course_user[:course_user_id]), method: :patch,
+                              data: {confirm: t("you_sure_active")},
+                              "data-tooltip" => t("active"),
+                              class: "btn btn-outline-info btn-border-radius" do %>
+                              <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <% end %>
+                          </div>
+                          <div class="col-4">
+                            <%= link_to admin_courses_user_path(course_user[:course_user]), method: :delete,
+                              data: {confirm: t("you_sure_delete")},
+                              "data-tooltip" => t("delete"),
+                              class: "btn btn-outline-danger btn-border-radius" do %>
+                              <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            <% end %>
+                          </div>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <%= paginate @list_wait, theme: "twitter-bootstrap-4" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal-courses-users">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><%= t ".details_course" %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".email" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course_user.email }}</h4>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".fullname_user" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course_user.fullname_user }}</h4>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".course_name" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course_user.course_name }}</h4>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".name_subject" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course_user.name_subject }}</h4>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".debit" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4 >{{ formatNumber(course_user.debit) }}</h4>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"><%= t ".created_at" %></label>
+              <div class="col-lg-9 padding-top-10">
+                <h4>{{ course_user.created_at }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t "close" %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

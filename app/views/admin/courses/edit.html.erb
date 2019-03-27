@@ -3,7 +3,9 @@
 <% provide :method_form, :patch %>
 <% provide :path_form, admin_course_path %>
 
-<div class="container py-3">
+<%= javascript_include_tag "course", "data-turbolinks-track": "reload" %>
+
+<div class="container py-3" >
   <div class="row">
     <div class="mx-auto col-sm-6">
       <div class="card">
