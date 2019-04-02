@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "admin/lessons#index"
+  mount Ckeditor::Engine => '/ckeditor'
+  root "home#index"
   devise_for :users, path: "", path_names: {
     sign_in: "login", sign_out: "logout", password: "secret",
     confirmation: "verification", unlock: "unblock",
@@ -16,4 +17,11 @@ Rails.application.routes.draw do
   end
   resources :courses
   resources :courses_users
+  resources :lessons
+
+  resources :lessons do
+    collection do
+      match "search" => "admin/lessons#search", :via => [:get, :post], :as => :search
+    end
+  end
 end

@@ -3,23 +3,26 @@
     <div class="col-sm-4">
       <div class="page-header float-left">
         <div class="page-title">
-
-            <h1><%=link_to t("lessons.index.new_lessons"), new_admin_lesson_path, class: "btn btn-outline-success" %></h1>
-
+          <h1><%=link_to t("lessons.index.new_lessons"), new_admin_lesson_path, class: "btn btn-outline-success" %></h1>
         </div>
       </div>
     </div>
     <div class="col-sm-8">
-      <div class="page-header float-right">
-        <div class="page-title">
-          <ol class="breadcrumb text-right">
-            <li><a href="#"></a></li>
-          </ol>
+      <div class="page-header float-left">
+        <div class="page-title row" style="padding: 17px">
+          <%= search_form_for @search, url: admin_lessons_path do |f| %>
+            <div class="col-sm-9">
+              <%= f.text_field :content, class: "form-control", placeholder: "Enter search term" %>
+            </div>
+            <div class="col-sm-3" style="line-height: 38px; background: aliceblue;">
+              <%= f.submit "Search", class: "form-control" %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-  <div class="content mt-3">
+  <div class="content mt-3" id="blogpost-table">
     <div class="animated fadeIn">
       <div class="row">
         <div class="col-md-12">
@@ -28,21 +31,24 @@
               <strong class="card-title"><%= t "lessons.index.lessons_list" %></strong>
             </div>
             <div class="table-responsive">
-              <table style="text-align: center" id="bootstrap-data-table-export" class="table table-striped table-bordered">
+              <table style="text-align: center" id="bootstrap-data-table-export"
+                class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th scope="col"><%= t "number" %></th>
+                    <th scope="col"><%= t "numbers" %></th>
                     <th scope="col"><%= t "lessons.index.title" %></th>
                     <th scope="col"><%= t "lessons.index.content" %></th>
+                    <th scope="col"><%= t "courses.index.course" %></th>
                     <th scope="col"><%= t ".actions" %></th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @lessons.each_with_index do |lesson, index| %>
                     <tr>
-                      <th scope="row"><%= index+1 %></th>
+                      <td scope="row"><%= index+1 %></td>
                       <td><%= lesson.title %></td>
                       <td><%= lesson.content %></td>
+                      <td><%= lesson.course.course_name %></td>
                       <td>
                         <div class="icon-btn">
                           <%= link_to  admin_lesson_path(lesson), class: "btn btn-outline-primary btn-border-radius" do %>
@@ -56,7 +62,7 @@
                         </div>
                         <div class="icon-btn">
                           <%= link_to admin_lesson_path(lesson), method: :delete, data: {confirm: t(".you_sure")},
-                            class: "btn btn-outline-danger btn-border-radius" do %>
+                              class: "btn btn-outline-danger btn-border-radius" do %>
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                           <% end %>
                         </div>
@@ -65,11 +71,13 @@
                   <% end %>
                 </tbody>
               </table>
-              <%= paginate @lessons, theme: "twitter-bootstrap-4" %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+
 </div>

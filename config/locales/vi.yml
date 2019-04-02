@@ -6,7 +6,7 @@ vi:
   female: Nữ
   other_gender: Giới tính khác
   select_gender: Chọn giới tính
-  number: STT
+  numbers: STT
   cancel: Hủy
   save: Lưu
   update: Cập Nhật
